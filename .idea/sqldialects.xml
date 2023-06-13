@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u202114785_Brian.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u202117396_Edson.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u202117709_Silvana.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u20211c289_Heather.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u202124002_Gabriel.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Querys Integrantes (SQL)/u202218758_Luz.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Trabajo Grupal (SQL)/Wolex_Create_Tables.sql" dialect="TSQL" />
+  </component>
+</project>
