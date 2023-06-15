@@ -71,7 +71,7 @@ db.createCollection("usuario", {
                     maxLength: 20,
                   },
                   capacidadMedidor: {
-                    bsonType: "decimal",
+                    bsonType: "number",
                   },
                   electrodomesticos: {
                     bsonType: "array",
@@ -116,10 +116,10 @@ db.createCollection("usuario", {
                           maxLength: 300,
                         },
                         minutosDeUsoElec: {
-                          bsonType: "int",
+                          bsonType: "number",
                         },
                         consumoEnergiaElec: {
-                          bsonType: "decimal",
+                          bsonType: "number",
                         },
                       },
                     },
@@ -167,7 +167,3 @@ db.createCollection("usuario", {
     },
   },
 });
-
-// INSERTAR DATO QUE CUMPLE CON LAS CONDICIONES
-
-// INSERTAR DATO QUE NO CUMPLE CON LAS CONDICIONES
