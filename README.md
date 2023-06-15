@@ -1,6 +1,6 @@
 # Grupo 3 - Base de Datos
 
-- Repositorio para guardar las consultas creadas en DataGrip.
+- Repositorio para guardar las consultas creadas para las TB's.
 - Repositorio para guardar querys en SQL y NoSQL de cada integrante.
 
 # Physical Data Model
