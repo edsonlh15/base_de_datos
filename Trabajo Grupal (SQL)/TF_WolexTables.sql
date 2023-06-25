@@ -1,3 +1,5 @@
+-- DROP DATABASE wolex;
+
 -- CREATE DATABASE
 CREATE DATABASE wolex;
 
@@ -84,6 +86,14 @@ CREATE TABLE empresa_reguladora (
     CONSTRAINT empresa_reguladora_pk PRIMARY KEY  (idEmpresaReguladora)
 );
 
+-- Table: estabilidad_poste
+CREATE TABLE estabilidad_poste (
+    idEstabilidadPoste int  NOT NULL,
+    tipoEstabilidad varchar(60)  NOT NULL,
+    detalle varchar(777)  NOT NULL,
+    CONSTRAINT estabilidad_poste_pk PRIMARY KEY  (idEstabilidadPoste)
+);
+
 -- Table: historial_reporte_consumo
 CREATE TABLE historial_reporte_consumo (
     idHistorialReporteConsumo int  NOT NULL,
@@ -103,7 +113,7 @@ CREATE TABLE mantenimiento (
     hora time(6)  NOT NULL,
     calidad varchar(20)  NOT NULL,
     idTipoMantenimiento int  NOT NULL,
-    CONSTRAINT mantenimiento_pk PRIMARY KEY  (idTecnico,idPosteLuz)
+    CONSTRAINT mantenimiento_pk PRIMARY KEY  (idTecnico, idPosteLuz)
 );
 
 -- Table: medidor_luz
@@ -122,9 +132,9 @@ CREATE TABLE medidor_luz (
 CREATE TABLE poste_luz (
     idPosteLuz int  NOT NULL,
     fechaInstalacion date  NOT NULL,
-    estabilidad varchar(30)  NOT NULL,
+    idEstabilidadPoste int  NOT NULL,
     idEmpresaReguladora int  NOT NULL,
-    idCiudad int  NOT NULL,
+    idZona int  NOT NULL,
     CONSTRAINT poste_luz_pk PRIMARY KEY  (idPosteLuz)
 );
 
@@ -164,7 +174,7 @@ CREATE TABLE tecnico (
     nombres varchar(40)  NOT NULL,
     apellidos varchar(40)  NOT NULL,
     telefono char(9)  NOT NULL,
-    dni char(7)  NOT NULL,
+    dni char(8)  NOT NULL,
     aniosServicio int  NOT NULL,
     mesesServicio int  NOT NULL,
     empresa varchar(60)  NOT NULL,
@@ -174,8 +184,8 @@ CREATE TABLE tecnico (
 -- Table: tipo_mantenimiento
 CREATE TABLE tipo_mantenimiento (
     idTipoMantenimiento int  NOT NULL,
-    tipoMantenimiento varchar(20)  NOT NULL,
-    especificacion varchar(777)  NOT NULL,
+    tipoMantenimiento varchar(60)  NOT NULL,
+    detalle varchar(777)  NOT NULL,
     CONSTRAINT tipo_mantenimiento_pk PRIMARY KEY  (idTipoMantenimiento)
 );
 
@@ -192,14 +202,14 @@ CREATE TABLE usuario (
 -- Table: zona
 CREATE TABLE zona (
     idZona int  NOT NULL,
-    nombreZona varchar(50)  NOT NULL,
+    nombreZona varchar(50)  NULL,
     latitud decimal(9,6)  NOT NULL,
     longitud decimal(9,6)  NOT NULL,
-    idDistrito int  NOT NULL,
+    idDistrito int  NULL,
     CONSTRAINT zona_pk PRIMARY KEY  (idZona)
 );
 
--- FOREIGN KEYS
+-- foreign keys
 -- Reference: aviso_electrodomestico (table: aviso)
 ALTER TABLE aviso ADD CONSTRAINT aviso_electrodomestico
     FOREIGN KEY (idElectrodomestico)
@@ -270,10 +280,15 @@ ALTER TABLE medidor_luz ADD CONSTRAINT medidor_luz_empresa_proveedora
     FOREIGN KEY (idEmpresaProveedora)
     REFERENCES empresa_proveedora (idEmpresaProveedora);
 
--- Reference: poste_luz_ciudad (table: poste_luz)
-ALTER TABLE poste_luz ADD CONSTRAINT poste_luz_ciudad
-    FOREIGN KEY (idCiudad)
-    REFERENCES ciudad (idCiudad);
+-- Reference: poste_luz_estabilidad_poste (table: poste_luz)
+ALTER TABLE poste_luz ADD CONSTRAINT poste_luz_estabilidad_poste
+    FOREIGN KEY (idEstabilidadPoste)
+    REFERENCES estabilidad_poste (idEstabilidadPoste);
+
+-- Reference: poste_luz_zona (table: poste_luz)
+ALTER TABLE poste_luz ADD CONSTRAINT poste_luz_zona
+    FOREIGN KEY (idZona)
+    REFERENCES zona (idZona);
 
 -- Reference: propiedad_dispositivo_medidor (table: propiedad)
 ALTER TABLE propiedad ADD CONSTRAINT propiedad_dispositivo_medidor
