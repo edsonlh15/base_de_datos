@@ -1,4 +1,4 @@
--- Usar la base de datos en la nube
+-- Usar la base de datos
 USE wolex;
 
 -- Inserts para la tabla "usuario"
@@ -142,6 +142,20 @@ VALUES
     (2, 'Enel Perú', 'Información de Enel Perú', 1),
     (3, 'Electro Dunas', 'Información de Electro Dunas', 1);
 
+-- Inserts para la tabla "medidor_luz"
+INSERT INTO medidor_luz (idMedidorLuz, marca, modelo, fechaInstalacion, capacidad, consumoMes, idEmpresaproveedora)
+VALUES
+    (1, 'Schneider Electric', 'iEM3150', '2022-01-01', 100.0000, 50.0000, 1),
+    (2, 'ABB', 'B21', '2021-05-15', 200.0000, 80.0000, 2),
+    (3, 'Siemens', 'PAC3200', '2023-03-10', 150.0000, 60.0000, 3);
+
+-- Inserts para la tabla "reporte_consumo_proveedora"
+INSERT INTO reporte_consumo_proveedora (idReporteConsumoProveedora, idMedidorLuz, consumoTotal, fecha)
+VALUES
+    (1, 1, 500, '2023-06-01'),
+    (2, 2, 800, '2023-06-01'),
+    (3, 3, 600, '2023-06-01');
+    
 -- Inserts para la tabla "dispositivo_medidor"
 INSERT INTO dispositivo_medidor (idDispositivoMedidor, modeloMedidor, marcaMedidor, tipoMedidor, capacidadMedidor)
 VALUES
@@ -577,20 +591,6 @@ VALUES
     (29, '2023-07-23', 'Exceso de tiempo de uso en la computadora', 'Has utilizado la computadora durante un período prolongado. Recuerda apagarla o ponerla en modo de suspensión cuando no la estés utilizando.', 4, 27),
     (30, '2023-07-24', 'Problema de temperatura en el congelador', 'La temperatura del congelador parece estar demasiado baja. Verifica su configuración y realiza el mantenimiento correspondiente.', 5, 4);
 
--- Inserts para la tabla "medidor_luz"
-INSERT INTO medidor_luz (idMedidorLuz, marca, modelo, fechaInstalacion, capacidad, consumoMes, idEmpresaproveedora)
-VALUES
-    (1, 'Schneider Electric', 'iEM3150', '2022-01-01', 100.0000, 50.0000, 1),
-    (2, 'ABB', 'B21', '2021-05-15', 200.0000, 80.0000, 2),
-    (3, 'Siemens', 'PAC3200', '2023-03-10', 150.0000, 60.0000, 3);
-
--- Inserts para la tabla "reporte_consumo_proveedora"
-INSERT INTO reporte_consumo_proveedora (idReporteConsumoProveedora, idMedidorLuz, consumoTotal, fecha)
-VALUES
-    (1, 1, 500, '2023-06-01'),
-    (2, 2, 800, '2023-06-01'),
-    (3, 3, 600, '2023-06-01');
-    
 -- Inserts para la tabla "estabilidad_poste"
 INSERT INTO estabilidad_poste (idEstabilidadPoste, tipoEstabilidad, detalle)
 VALUES 

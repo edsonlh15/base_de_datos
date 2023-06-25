@@ -94,16 +94,6 @@ CREATE TABLE estabilidad_poste (
     CONSTRAINT estabilidad_poste_pk PRIMARY KEY  (idEstabilidadPoste)
 );
 
--- Table: historial_reporte_consumo
-CREATE TABLE historial_reporte_consumo (
-    idHistorialReporteConsumo int  NOT NULL,
-    fechaInicial date  NOT NULL,
-    fechaFinal date  NOT NULL,
-    idUsuario int  NOT NULL,
-    idReporteConsumoEnergia int  NOT NULL,
-    CONSTRAINT historial_reporte_consumo_pk PRIMARY KEY  (idHistorialReporteConsumo)
-);
-
 -- Table: mantenimiento
 CREATE TABLE mantenimiento (
     idTecnico int  NOT NULL,
@@ -113,7 +103,7 @@ CREATE TABLE mantenimiento (
     hora time(6)  NOT NULL,
     calidad varchar(20)  NOT NULL,
     idTipoMantenimiento int  NOT NULL,
-    CONSTRAINT mantenimiento_pk PRIMARY KEY  (idTecnico, idPosteLuz)
+    CONSTRAINT mantenimiento_pk PRIMARY KEY  (idTecnico,idPosteLuz)
 );
 
 -- Table: medidor_luz
@@ -249,16 +239,6 @@ ALTER TABLE electrodomestico ADD CONSTRAINT electrodomestico_reporte_consumo
 ALTER TABLE empresa_proveedora ADD CONSTRAINT empresa_proveedora_empresa_reguladora
     FOREIGN KEY (idEmpresaReguladora)
     REFERENCES empresa_reguladora (idEmpresaReguladora);
-
--- Reference: historial_reporte_consumo_reporte_consumo (table: historial_reporte_consumo)
-ALTER TABLE historial_reporte_consumo ADD CONSTRAINT historial_reporte_consumo_reporte_consumo
-    FOREIGN KEY (idReporteConsumoEnergia)
-    REFERENCES reporte_consumo (idReporteConsumoEnergia);
-
--- Reference: historial_reporte_consumo_usuario (table: historial_reporte_consumo)
-ALTER TABLE historial_reporte_consumo ADD CONSTRAINT historial_reporte_consumo_usuario
-    FOREIGN KEY (idUsuario)
-    REFERENCES usuario (idUsuario);
 
 -- Reference: mantenimiento_poste_luz (table: mantenimiento)
 ALTER TABLE mantenimiento ADD CONSTRAINT mantenimiento_poste_luz
