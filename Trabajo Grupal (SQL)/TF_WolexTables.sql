@@ -1,6 +1,5 @@
 -- CREATE DATABASE
 CREATE DATABASE wolex;
-GO
 
 -- USE WOLEX DATABASE
 USE wolex;
@@ -63,8 +62,8 @@ CREATE TABLE electrodomestico (
     modeloElec varchar(60)  NOT NULL,
     tipoElec varchar(50)  NOT NULL,
     descripcionElec varchar(300)  NOT NULL,
-    minutosDeUsoElec int  NOT NULL,
-    consumoEnergiaElec int  NOT NULL,
+    minutosDeUsoElec int NULL,
+    consumoEnergiaElec int NULL,
     CONSTRAINT electrodomestico_pk PRIMARY KEY  (idElectrodomestico)
 );
 
@@ -325,6 +324,3 @@ ALTER TABLE reporte_consumo ADD CONSTRAINT reporte_consumo_usuario
 ALTER TABLE zona ADD CONSTRAINT zona_distrito
     FOREIGN KEY (idDistrito)
     REFERENCES distrito (idDistrito);
-
--- End of file.
-
