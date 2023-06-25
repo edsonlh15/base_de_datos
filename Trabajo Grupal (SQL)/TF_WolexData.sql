@@ -1,5 +1,5 @@
 -- Usar la base de datos en la nube
-USE bhzasjw2mpn2ng6bzfkb
+USE wolex;
 
 -- Inserts para la tabla "usuario"
 INSERT INTO usuario (idUsuario, nombres, apellidos, telefono, dni)
@@ -8,14 +8,12 @@ VALUES (1, 'Brian', 'Uceda Hirata', '982849285', '12345678'),
        (3, 'Ana', 'Gutiérrez Torres', '956784512', '76543210'),
        (4, 'María', 'López Rodríguez', '964738291', '65432109'),
        (5, 'Carlos', 'Vargas Silva', '951234567', '54321098');
-SELECT * FROM usuario;
 
 -- Inserts para la tabla "ciudad"
 INSERT INTO ciudad (idCiudad, nombreCiudad, codigoPostal)
 VALUES (1, 'Lima', '15029'),
        (2, 'Arequipa', '10592'),
        (3, 'Trujillo', '13005');
-SELECT * FROM ciudad;
 
 -- Inserts para la tabla "distrito"
 INSERT INTO distrito (idDistrito, nombreDistrito, codigoDistrital, idCiudad)
@@ -24,7 +22,6 @@ VALUES (1, 'Miraflores', '150104', 1),
        (3, 'Yanahuara', '040105', 2),
        (4, 'Cercado de Arequipa', '040101', 2),
        (5, 'Moche', '130104', 3);
-SELECT * FROM distrito;
 
 -- Inserts para la tabla "zona"
 INSERT INTO zona (idZona, nombreZona, latitud, longitud, idDistrito)
@@ -59,19 +56,16 @@ VALUES
   (28, 'Parque Los Próceres', -12.086333, -77.023487, 2),
   (29, 'Parque de la Exposición', -12.064615, -77.030019, 2),
   (30, 'Parque Campo de Marte', -12.089497, -77.037802, 2);
-SELECT * FROM zona;
 
 -- Inserts para la tabla "empresa_reguladora"
 INSERT INTO empresa_reguladora (idEmpresaReguladora, nombreReguladora, informacion)
 VALUES (1, 'OSINERGMIN', 'Información de OSINERGMIN');
-SELECT * FROM empresa_reguladora;
 
--- Inserts para la tabla "empresa_provedora"
-INSERT INTO empresa_provedora (idEmpresaProvedora, nombreProveedora, informacion, idEmpresaReguladora)
+-- Inserts para la tabla "empresa_proveedora"
+INSERT INTO empresa_proveedora (idEmpresaproveedora, nombreProveedora, informacion, idEmpresaReguladora)
 VALUES (1, 'Luz del Sur', 'Información de Luz del Sur', 1),
        (2, 'Enel Perú', 'Información de Enel Perú', 1),
        (3, 'Electro Dunas', 'Información de Electro Dunas', 1);
-SELECT * FROM empresa_provedora;
 
 -- Inserts para la tabla "dispositivo_medidor"
 INSERT INTO dispositivo_medidor (idDispositivoMedidor, modeloMedidor, marcaMedidor, tipoMedidor, capacidadMedidor)
@@ -106,10 +100,9 @@ VALUES
   (28, 'Elster A3 ETA', 'Elster', 'Medidor de energía', 1200.00),
   (29, 'ABB Alpha Premium', 'ABB', 'Medidor de energía', 550.00),
   (30, 'Itron Centron Supreme', 'Itron', 'Medidor de energía', 1250.00);
-SELECT * FROM dispositivo_medidor;
 
 -- Inserts para la tabla "propiedad"
-INSERT INTO propiedad (idPropiedad, tipoPropiedad, idZona, idUsuario, idDispositivoMedidor, idEmpresaProvedora)
+INSERT INTO propiedad (idPropiedad, tipoPropiedad, idZona, idUsuario, idDispositivoMedidor, idEmpresaproveedora)
 VALUES 
   (1, 'Departamento', 1, 1, 1, 1),
   (2, 'Departamento', 2, 5, 2, 2),
@@ -141,7 +134,6 @@ VALUES
   (28, 'Departamento', 28, 1, 28, 3),
   (29, 'Departamento', 29, 4, 29, 3),
   (30, 'Casa', 30, 1, 30, 1);
-SELECT * FROM propiedad;-- ORDER BY idUsuario;
 
 -- Inserts para la tabla "reporte_consumo"
 INSERT INTO reporte_consumo (idReporteConsumoEnergia, fechaExacta, idUsuario, idPropiedad, idDispositivoMedidor)
@@ -311,7 +303,6 @@ VALUES
   (158, '2023-07-22 11:15:00', 5, 23, 1),
   (159, '2023-07-23 13:50:00', 5, 19, 2),
   (160, '2023-07-24 15:40:00', 5, 18, 4);
-SELECT * FROM reporte_consumo;
 
 -- Inserts para la tabla "electrodomestico"
 INSERT INTO electrodomestico (idElectrodomestico, idDispositivoMedidor, idReporteConsumoEnergia, nombreElec, marcaElec, modeloElec, tipoElec, descripcionElec, minutosDeUsoElec, consumoEnergiaElec) VALUES
@@ -475,7 +466,6 @@ INSERT INTO electrodomestico (idElectrodomestico, idDispositivoMedidor, idReport
   (158, 29, 158, 'Refrigeradora', 'Samsung', 'HIJ456', 'Doble puerta', 'Refrigeradora de dos puertas', 240, 450),
   (159, 30, 159, 'Lavadora', 'Maytag', 'KLM789', 'Carga superior', 'Lavadora de carga superior', 90, 300),
   (160, 30, 160, 'Secadora', 'LG', 'NOP123', 'Eléctrica', 'Secadora de ropa eléctrica', 120, 350);
-SELECT * FROM electrodomestico;
 
 -- Inserts para la tabla "aviso"
 INSERT INTO aviso (idAviso, fecha, mensaje, descripcionDetallada, idUsuario, idElectrodomestico)
@@ -510,15 +500,13 @@ VALUES
   (28, '2023-07-22', 'Falla en el sistema de alarma', 'El sistema de alarma ha presentado un fallo en su funcionamiento. Revisa los sensores y restablece la configuración.', 3, 20),
   (29, '2023-07-23', 'Exceso de tiempo de uso en la computadora', 'Has utilizado la computadora durante un período prolongado. Recuerda apagarla o ponerla en modo de suspensión cuando no la estés utilizando.', 4, 27),
   (30, '2023-07-24', 'Problema de temperatura en el congelador', 'La temperatura del congelador parece estar demasiado baja. Verifica su configuración y realiza el mantenimiento correspondiente.', 5, 4);
-SELECT * FROM aviso;
 
 -- Inserts para la tabla "medidor_luz"
-INSERT INTO medidor_luz (idMedidorLuz, marca, modelo, fechaInstalacion, capacidad, consumoMes, idEmpresaProvedora)
+INSERT INTO medidor_luz (idMedidorLuz, marca, modelo, fechaInstalacion, capacidad, consumoMes, idEmpresaproveedora)
 VALUES
     (1, 'Schneider Electric', 'iEM3150', '2022-01-01', 100.0000, 50.0000, 1),
     (2, 'ABB', 'B21', '2021-05-15', 200.0000, 80.0000, 2),
     (3, 'Siemens', 'PAC3200', '2023-03-10', 150.0000, 60.0000, 3);
-SELECT * FROM medidor_luz;
 
 -- Inserts para la tabla "reporte_consumo_proveedora"
 INSERT INTO reporte_consumo_proveedora (idReporteConsumoProveedora, idMedidorLuz, consumoTotal, fecha)
@@ -526,4 +514,3 @@ VALUES
     (1, 1, 500, '2023-06-01'),
     (2, 2, 800, '2023-06-01'),
     (3, 3, 600, '2023-06-01');
-SELECT * FROM reporte_consumo_proveedora;

@@ -62,18 +62,18 @@ CREATE TABLE electrodomestico (
     modeloElec varchar(60)  NOT NULL,
     tipoElec varchar(50)  NOT NULL,
     descripcionElec varchar(300)  NOT NULL,
-    minutosDeUsoElec int NULL,
-    consumoEnergiaElec int NULL,
+    minutosDeUsoElec int  NOT NULL,
+    consumoEnergiaElec int  NOT NULL,
     CONSTRAINT electrodomestico_pk PRIMARY KEY  (idElectrodomestico)
 );
 
--- Table: empresa_provedora
-CREATE TABLE empresa_provedora (
-    idEmpresaProvedora int  NOT NULL,
+-- Table: empresa_proveedora
+CREATE TABLE empresa_proveedora (
+    idEmpresaProveedora int  NOT NULL,
     nombreProveedora varchar(50)  NOT NULL,
     informacion varchar(777)  NOT NULL,
     idEmpresaReguladora int  NOT NULL,
-    CONSTRAINT empresa_provedora_pk PRIMARY KEY  (idEmpresaProvedora)
+    CONSTRAINT empresa_proveedora_pk PRIMARY KEY  (idEmpresaProveedora)
 );
 
 -- Table: empresa_reguladora
@@ -114,7 +114,7 @@ CREATE TABLE medidor_luz (
     fechaInstalacion date  NOT NULL,
     capacidad decimal(10,4)  NOT NULL,
     consumoMes decimal(10,4)  NOT NULL,
-    idEmpresaProvedora int  NOT NULL,
+    idEmpresaProveedora int  NOT NULL,
     CONSTRAINT medidor_luz_pk PRIMARY KEY  (idMedidorLuz)
 );
 
@@ -135,7 +135,7 @@ CREATE TABLE propiedad (
     idZona int  NOT NULL,
     idUsuario int  NOT NULL,
     idDispositivoMedidor int  NOT NULL,
-    idEmpresaProvedora int  NOT NULL,
+    idEmpresaProveedora int  NOT NULL,
     CONSTRAINT propiedad_pk PRIMARY KEY  (idPropiedad)
 );
 
@@ -235,8 +235,8 @@ ALTER TABLE electrodomestico ADD CONSTRAINT electrodomestico_reporte_consumo
     FOREIGN KEY (idReporteConsumoEnergia)
     REFERENCES reporte_consumo (idReporteConsumoEnergia);
 
--- Reference: empresa_proveedora_empresa_reguladora (table: empresa_provedora)
-ALTER TABLE empresa_provedora ADD CONSTRAINT empresa_proveedora_empresa_reguladora
+-- Reference: empresa_proveedora_empresa_reguladora (table: empresa_proveedora)
+ALTER TABLE empresa_proveedora ADD CONSTRAINT empresa_proveedora_empresa_reguladora
     FOREIGN KEY (idEmpresaReguladora)
     REFERENCES empresa_reguladora (idEmpresaReguladora);
 
@@ -267,8 +267,8 @@ ALTER TABLE mantenimiento ADD CONSTRAINT mantenimiento_tipo_mantenimiento
 
 -- Reference: medidor_luz_empresa_proveedora (table: medidor_luz)
 ALTER TABLE medidor_luz ADD CONSTRAINT medidor_luz_empresa_proveedora
-    FOREIGN KEY (idEmpresaProvedora)
-    REFERENCES empresa_provedora (idEmpresaProvedora);
+    FOREIGN KEY (idEmpresaProveedora)
+    REFERENCES empresa_proveedora (idEmpresaProveedora);
 
 -- Reference: poste_luz_ciudad (table: poste_luz)
 ALTER TABLE poste_luz ADD CONSTRAINT poste_luz_ciudad
@@ -280,10 +280,10 @@ ALTER TABLE propiedad ADD CONSTRAINT propiedad_dispositivo_medidor
     FOREIGN KEY (idDispositivoMedidor)
     REFERENCES dispositivo_medidor (idDispositivoMedidor);
 
--- Reference: propiedad_empresa_provedora (table: propiedad)
-ALTER TABLE propiedad ADD CONSTRAINT propiedad_empresa_provedora
-    FOREIGN KEY (idEmpresaProvedora)
-    REFERENCES empresa_provedora (idEmpresaProvedora);
+-- Reference: propiedad_empresa_proveedora (table: propiedad)
+ALTER TABLE propiedad ADD CONSTRAINT propiedad_empresa_proveedora
+    FOREIGN KEY (idEmpresaProveedora)
+    REFERENCES empresa_proveedora (idEmpresaProveedora);
 
 -- Reference: propiedad_usuario (table: propiedad)
 ALTER TABLE propiedad ADD CONSTRAINT propiedad_usuario
